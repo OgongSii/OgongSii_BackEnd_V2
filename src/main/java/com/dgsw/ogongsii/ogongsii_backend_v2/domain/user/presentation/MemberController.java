@@ -1,7 +1,7 @@
 package com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.presentation;
 
-import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.presentation.dto.Request.LoginRequest;
-import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.presentation.dto.Request.SignUpRequest;
+import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.presentation.dto.request.LoginRequest;
+import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.presentation.dto.request.SignUpRequest;
 import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
