@@ -1,11 +1,12 @@
-package com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.service;
+package com.dgsw.ogongsii.ogongsii_backend_v2.domain.auth.service;
 
+import com.dgsw.ogongsii.ogongsii_backend_v2.domain.auth.presentation.dto.request.LoginRequest;
+import com.dgsw.ogongsii.ogongsii_backend_v2.domain.auth.presentation.dto.request.SignUpRequest;
 import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.domain.Member;
 import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.domain.repository.MemberRepository;
 import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.exception.MemberNotFoundException;
 import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.exception.MemberPasswordNotMatchedException;
-import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.presentation.dto.request.LoginRequest;
-import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.presentation.dto.request.SignUpRequest;
+import com.dgsw.ogongsii.ogongsii_backend_v2.domain.auth.presentation.dto.ro.LoginRo;
 import com.dgsw.ogongsii.ogongsii_backend_v2.global.jwt.JwtTokenProvider;
 import com.dgsw.ogongsii.ogongsii_backend_v2.global.security.WebSecurityConfig;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class MemberService {
+public class AuthService {
 
     private final MemberRepository memberRepository;
 
@@ -25,7 +26,7 @@ public class MemberService {
 
 
 
-    public ResponseEntity<?> signUp(SignUpRequest request) {
+    public ResponseEntity<?> signup(SignUpRequest request) {
 
         if(memberRepository.existsByName(request.getName())) {
             return ResponseEntity.badRequest().body("이미 존재하는 이름");
@@ -38,10 +39,10 @@ public class MemberService {
 
         memberRepository.save(member);
 
-        return ResponseEntity.ok("회원가입 되었습니다" + member.getId());
+        return ResponseEntity.ok("회원가입 되었습니다");
     }
 
-    public String login(LoginRequest request) {
+    public LoginRo login(LoginRequest request) {
         Member member = memberRepository.findByName(request.getName())
                 .orElseThrow(MemberNotFoundException::new);
 
@@ -49,7 +50,10 @@ public class MemberService {
             throw MemberPasswordNotMatchedException.EXCEPTION;
         }
 
-        return jwtTokenProvider.createToken(member.getName());
+        return LoginRo.builder()
+                .accessToken(jwtTokenProvider.createToken(member.getName()))
+                .name(member.getName())
+                .build();
     }
 
 
