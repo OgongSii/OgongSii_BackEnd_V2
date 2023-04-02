@@ -1,4 +1,4 @@
-package com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.presentation.dto.Ro;
+package com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.presentation.dto.ro;
 
 import lombok.Getter;
 

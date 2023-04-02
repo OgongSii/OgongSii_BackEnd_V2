@@ -1,4 +1,4 @@
-package com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.presentation.dto.Request;
+package com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.presentation.dto.request;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
