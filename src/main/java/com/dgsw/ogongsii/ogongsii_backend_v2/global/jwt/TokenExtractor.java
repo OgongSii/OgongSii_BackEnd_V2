@@ -12,7 +12,7 @@ import java.util.Enumeration;
 public class TokenExtractor {
 
     public String extract(HttpServletRequest request, String type) {
-        Enumeration<String> headers = request.getHeaders("auth");
+        Enumeration<String> headers = request.getHeaders("authorization");
 
         while (headers.hasMoreElements()) {
             String value = headers.nextElement();
