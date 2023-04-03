@@ -2,6 +2,7 @@ package com.dgsw.ogongsii.ogongsii_backend_v2.domain.record.presentation.dto.ro;
 
 import com.dgsw.ogongsii.ogongsii_backend_v2.domain.record.domain.Record;
 import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.domain.Member;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.Set;

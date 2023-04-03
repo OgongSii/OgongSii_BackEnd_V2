@@ -18,7 +18,7 @@ public class RankController {
     private final RankService rankService;
 
     @GetMapping("/today")
-    public List<Record> getTodayRank() {
+    public List<RecordRo> getTodayRank() {
         return rankService.getTodayRank();
     }
 

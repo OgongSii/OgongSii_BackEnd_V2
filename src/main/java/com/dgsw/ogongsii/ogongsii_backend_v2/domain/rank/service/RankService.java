@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -23,9 +24,13 @@ public class RankService {
     private MemberRepository memberRepository;
 
     @Transactional(readOnly = true)
-    public List<Record> getTodayRank() {
+    public List<RecordRo> getTodayRank() {
         LocalDate reg = LocalDate.now();
-        return recordRepository.findByRegDate(reg, Sort.by(Sort.Direction.DESC,"h","m"));
+        List<Record> recordList = recordRepository.findByRegDate(reg, Sort.by(Sort.Direction.DESC,"h","m"));
+        return recordList.stream()
+                .map(
+                        record -> new RecordRo(record.getMember())
+                ).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
