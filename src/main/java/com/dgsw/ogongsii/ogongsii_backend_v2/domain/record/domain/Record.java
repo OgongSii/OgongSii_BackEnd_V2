@@ -1,6 +1,6 @@
 package com.dgsw.ogongsii.ogongsii_backend_v2.domain.record.domain;
 
-import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.domain.Member;
+import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,18 +30,18 @@ public class Record {
 
     @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member member;
+    private User user;
 
     @Builder
-    public Record(Long id, Integer h, Integer m, Member member, LocalDate regDate) {
+    public Record(Long id, Integer h, Integer m, User user, LocalDate regDate) {
         this.id = id;
         this.h = h;
         this.m = m;
-        this.member = member;
+        this.user = user;
         this.regDate = regDate;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setMember(User user) {
+        this.user = user;
     }
 }

@@ -3,8 +3,8 @@ package com.dgsw.ogongsii.ogongsii_backend_v2.domain.rank.service;
 import com.dgsw.ogongsii.ogongsii_backend_v2.domain.record.domain.Record;
 import com.dgsw.ogongsii.ogongsii_backend_v2.domain.record.domain.repository.RecordRepository;
 import com.dgsw.ogongsii.ogongsii_backend_v2.domain.record.presentation.dto.ro.RecordRo;
-import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.domain.Member;
-import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.domain.repository.MemberRepository;
+import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.domain.User;
+import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.domain.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class RankService {
 
     private RecordRepository recordRepository;
 
-    private MemberRepository memberRepository;
+    private UserRepository userRepository;
 
     @Transactional(readOnly = true)
     public List<RecordRo> getTodayRank() {
@@ -29,15 +29,15 @@ public class RankService {
         List<Record> recordList = recordRepository.findByRegDate(reg, Sort.by(Sort.Direction.DESC,"h","m"));
         return recordList.stream()
                 .map(
-                        record -> new RecordRo(record.getMember())
+                        record -> new RecordRo(record.getUser())
                 ).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public List<RecordRo> getTotalRank() {
         List<RecordRo> list = new ArrayList<>();
-        for (Member member : memberRepository.findAll()) {
-            RecordRo recordRo = new RecordRo(member);
+        for (User user : userRepository.findAll()) {
+            RecordRo recordRo = new RecordRo(user);
             list.add(recordRo);
         }
         return list;

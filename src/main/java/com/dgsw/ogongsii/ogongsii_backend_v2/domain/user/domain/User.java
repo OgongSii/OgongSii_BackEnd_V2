@@ -16,7 +16,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Member extends BaseUUID {
+public class User extends BaseUUID {
 
     @Column(unique = true)
     private String name;
@@ -24,11 +24,11 @@ public class Member extends BaseUUID {
     @Column
     private String password;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Record> records;
 
     @Builder
-    public Member(String name, String password, Set<Record> records) {
+    public User(String name, String password, Set<Record> records) {
         this.name = name;
         this.password = password;
         this.records = records;

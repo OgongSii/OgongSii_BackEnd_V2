@@ -3,9 +3,9 @@ package com.dgsw.ogongsii.ogongsii_backend_v2.domain.record.service;
 import com.dgsw.ogongsii.ogongsii_backend_v2.domain.record.domain.Record;
 import com.dgsw.ogongsii.ogongsii_backend_v2.domain.record.domain.repository.RecordRepository;
 import com.dgsw.ogongsii.ogongsii_backend_v2.domain.record.presentation.dto.request.RecordRequest;
-import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.domain.Member;
-import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.domain.repository.MemberRepository;
-import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.exception.MemberNotFoundException;
+import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.domain.User;
+import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.domain.repository.UserRepository;
+import com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ public class RecordService {
 
     private final RecordRepository recordRepository;
 
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
 
 
     public void record(Record record) {
@@ -24,18 +24,18 @@ public class RecordService {
     }
 
     @Transactional
-    public void saveRecord(String name, RecordRequest request) throws Exception {
+    public void saveRecord(String name, RecordRequest request) {
 
-        Member member = memberRepository.findByName(name)
-                .orElseThrow(MemberNotFoundException::new);
+        User user = userRepository.findByName(name)
+                .orElseThrow(UserNotFoundException::new);
 
         Record record = Record.builder()
                 .h(request.getH())
                 .m(request.getM())
-                .member(member)
+                .user(user)
                 .build();
 
-        member.addRecord(record);
-        memberRepository.save(member);
+        user.addRecord(record);
+        userRepository.save(user);
     }
 }

@@ -3,11 +3,11 @@ package com.dgsw.ogongsii.ogongsii_backend_v2.domain.user.exception;
 import com.dgsw.ogongsii.ogongsii_backend_v2.global.exception.BusinessException;
 import org.springframework.http.HttpStatus;
 
-public class MemberPasswordNotMatchedException extends BusinessException {
+public class UserPasswordNotMatchedException extends BusinessException {
 
-    public static final MemberPasswordNotMatchedException EXCEPTION = new MemberPasswordNotMatchedException();
+    public static final UserPasswordNotMatchedException EXCEPTION = new UserPasswordNotMatchedException();
 
-    public MemberPasswordNotMatchedException() {
+    public UserPasswordNotMatchedException() {
         super(HttpStatus.BAD_REQUEST, "로그인 실패!");
     }
 

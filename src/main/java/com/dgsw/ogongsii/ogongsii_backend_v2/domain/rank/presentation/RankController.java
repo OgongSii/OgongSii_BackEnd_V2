@@ -1,7 +1,6 @@
 package com.dgsw.ogongsii.ogongsii_backend_v2.domain.rank.presentation;
 
 import com.dgsw.ogongsii.ogongsii_backend_v2.domain.rank.service.RankService;
-import com.dgsw.ogongsii.ogongsii_backend_v2.domain.record.domain.Record;
 import com.dgsw.ogongsii.ogongsii_backend_v2.domain.record.presentation.dto.ro.RecordRo;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
