@@ -18,11 +18,6 @@ public class RecordService {
 
     private final UserRepository userRepository;
 
-
-    public void record(Record record) {
-        recordRepository.save(record);
-    }
-
     @Transactional
     public void saveRecord(String name, RecordRequest request) {
 
